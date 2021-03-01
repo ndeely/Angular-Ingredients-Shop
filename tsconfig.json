@@ -2,11 +2,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "paths": {
-      "@header/*": ["src/app/header/*"],
-      "@recipes/*": ["src/app/recipes/*"],
-      "@shared/*": ["src/app/shared/*"]
+      "@header/*": ["app/header/*"],
+      "@recipes/*": ["app/recipes/*"],
+      "@shared/*": ["app/shared/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
