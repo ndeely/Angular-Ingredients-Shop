@@ -6,7 +6,8 @@
     "paths": {
       "@header/*": ["app/header/*"],
       "@recipes/*": ["app/recipes/*"],
-      "@shared/*": ["app/shared/*"]
+      "@shared/*": ["app/shared/*"],
+      "@shopping-list/*": ["app/shopping-list/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
