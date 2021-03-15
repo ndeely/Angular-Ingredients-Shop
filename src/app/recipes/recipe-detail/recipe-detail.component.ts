@@ -19,4 +19,9 @@ export class RecipeDetailComponent implements OnInit {
     this.rs.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
+  deleteRecipe() {
+    this.rs.deleteRecipe(this.recipe);
+
+  }
+
 }

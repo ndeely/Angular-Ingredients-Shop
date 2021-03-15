@@ -9,12 +9,18 @@ import {RecipeService} from "@recipes/recipe.service";
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[];
+  private recipes: Recipe[];
 
   constructor(private rs: RecipeService) { }
 
   ngOnInit(): void {
     this.recipes = this.rs.getRecipes();
+    this.rs.recipesChanged.subscribe(
+      (rs: Recipe[]) => {
+        this.recipes = rs;
+      }
+    );
   }
+
 
 }

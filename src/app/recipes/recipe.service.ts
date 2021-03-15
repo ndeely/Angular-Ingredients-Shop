@@ -7,6 +7,7 @@ import {ShoppingListService} from "@shopping-list/shopping-list.service";
 
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
+  recipesChanged = new EventEmitter<Recipe[]>();
 
   constructor(private sls: ShoppingListService) {}
 
@@ -42,5 +43,10 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.sls.addIngredients(ingredients);
+  }
+
+  deleteRecipe(recipe: Recipe) {
+    this.recipes.splice(this.recipes.indexOf(recipe), 1);
+    this.recipesChanged.emit(this.recipes);
   }
 }
