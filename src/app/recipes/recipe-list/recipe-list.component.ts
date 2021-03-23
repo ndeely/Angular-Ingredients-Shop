@@ -22,5 +22,9 @@ export class RecipeListComponent implements OnInit {
     );
   }
 
+  public getRecipes() {
+    return this.recipes.slice();
+  }
+
 
 }
