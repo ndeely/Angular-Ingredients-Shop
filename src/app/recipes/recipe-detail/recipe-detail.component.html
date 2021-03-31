@@ -22,7 +22,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a (click)="addToCart()">To Shopping List</a></li>
-                <li><a>Edit Recipe</a></li>
+                <li><a (click)="editRecipe()">Edit Recipe</a></li>
                 <li><a (click)="deleteRecipe()">Delete Recipe</a></li>
             </ul>
         </div>
@@ -33,6 +33,7 @@
         {{recipe.desc}}
     </div>
 </div>
+
 <div class="row">
     <div class="col-xs-12">
         <ul class="list-group">
