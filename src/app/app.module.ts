@@ -12,7 +12,6 @@ import { RecipeItemComponent } from '@recipes/recipe-list/recipe-item/recipe-ite
 import { ShoppingListComponent } from '@shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from '@shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from '@shared/dropdown.directive';
-import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing.module";
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
