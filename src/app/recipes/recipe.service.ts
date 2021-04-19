@@ -23,8 +23,8 @@ export class RecipeService {
     ),
     new Recipe(
       "Ice Cream",
-      "This is a whopper tiramisu!",
-      "https://upload.wikimedia.org/wikipedia/commons/f/fc/Tiramisu_with_blueberries_and_raspberries%2C_July_2011.jpg",
+      "This is the best ice cream recipe!",
+      "https://upload.wikimedia.org/wikipedia/commons/3/31/Ice_Cream_dessert_02.jpg",
       [
         new Ingredient("Milk", 1),
         new Ingredient("Cream", 1),
@@ -43,6 +43,16 @@ export class RecipeService {
   //returns single recipe by id
   getRecipe(id: number) {
     return this.recipes[id];
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes);
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes);
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {

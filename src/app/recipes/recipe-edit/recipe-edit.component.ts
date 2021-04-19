@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RecipeService} from "@recipes/recipe.service";
 import {Recipe} from "@recipes/recipe.model";
+import {relativeToRootDirs} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-recipe-edit',
@@ -15,7 +16,8 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private rs: RecipeService) { }
+              private rs: RecipeService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -28,7 +30,16 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.editMode) {
+      this.rs.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.rs.addRecipe(this.recipeForm.value);
+    }
+    this.onCancel();
+  }
 
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onAddIngredient() {
@@ -40,6 +51,10 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  onRemoveIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
   private initForm() {
     let recipe = new Recipe("", "", "", []);
     let ingredients = new FormArray([]);
@@ -48,17 +63,20 @@ export class RecipeEditComponent implements OnInit {
       if (recipe['ingredients']) {
         for (let ingredient of recipe.ingredients) {
           ingredients.push(new FormGroup({
-            'name': new FormControl(ingredient.name),
-            'amount': new FormControl(ingredient.amount)
+            'name': new FormControl(ingredient.name, Validators.required),
+            'amount': new FormControl(ingredient.amount, [
+              Validators.required,
+              Validators.pattern(/^[1-9]+[0-9]*$/)
+            ])
           }));
         }
       }
     }
 
     this.recipeForm = new FormGroup({
-      'name': new FormControl(recipe.name),
-      'imagePath': new FormControl(recipe.imagePath),
-      'desc': new FormControl(recipe.desc),
+      'name': new FormControl(recipe.name, Validators.required),
+      'imagePath': new FormControl(recipe.imagePath, Validators.required),
+      'desc': new FormControl(recipe.desc, Validators.required),
       'ingredients': ingredients
     });
   }
