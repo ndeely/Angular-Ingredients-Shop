@@ -27,7 +27,16 @@ export class AuthComponent {
 
     this.isLoading = true;
     if (this.isLoginMode) {
-      // ...
+      this.as.login(email, password).subscribe(
+        resData => {
+          console.log(resData);
+          this.isLoading = false;
+        },
+        errorMessage => {
+          this.error = errorMessage;
+          this.isLoading = false;
+        }
+      );
     } else {
       this.as.signUp(email, password).subscribe(
         resData => {
