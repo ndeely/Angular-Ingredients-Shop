@@ -1,9 +1,11 @@
-import {Component} from "@angular/core";
+import {Component, ComponentFactoryResolver, ViewChild} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 
 import {AuthResponseData, AuthService} from "./auth.service";
+import {AlertComponent} from "@shared/alert/alert.component";
+import {PlaceholderDirective} from "@shared/placeholder/placeholder.directive";
 
 @Component({
   selector: 'app-auth',
@@ -13,11 +15,14 @@ export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
+  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
+
   private authObs: Observable<AuthResponseData>;
 
   constructor(
     private as: AuthService,
-    private router: Router
+    private router: Router,
+    private cfr: ComponentFactoryResolver
   ) {}
 
   onSwitchMode() {
@@ -47,10 +52,21 @@ export class AuthComponent {
       },
       errorMessage => {
         this.error = errorMessage;
+        this.showErrorAlert(errorMessage);
         this.isLoading = false;
       }
     );
 
     form.reset();
+  }
+
+  onHandleError() {
+    this.error = null;
+  }
+
+  private showErrorAlert(message: string) {
+    this.cfr.resolveComponentFactory(
+      AlertComponent
+    );
   }
 }
