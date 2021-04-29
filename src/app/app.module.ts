@@ -48,7 +48,17 @@ import {PlaceholderDirective} from "@shared/placeholder/placeholder.directive";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RecipeService, ShoppingListService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    RecipeService,
+    ShoppingListService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }
