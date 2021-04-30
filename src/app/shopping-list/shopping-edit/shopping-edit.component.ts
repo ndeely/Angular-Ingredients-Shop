@@ -3,7 +3,6 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Ingredient } from '@shared/ingredient.model';
 import {ShoppingListService} from "@shopping-list/shopping-list.service";
 import {NgForm} from "@angular/forms";
-// @ts-ignore
 import {Subscription} from "rxjs/Subscription";
 
 @Component({

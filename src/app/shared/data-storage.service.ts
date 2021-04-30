@@ -8,6 +8,7 @@ import {AuthService} from "../auth/auth.service";
 
 @Injectable({ providedIn: "root" })
 export class DataStorageService {
+
   constructor(private http: HttpClient,
               private rs: RecipeService,
               private as: AuthService
@@ -19,7 +20,7 @@ export class DataStorageService {
       'https://angular-shop-d6060-default-rtdb.europe-west1.firebasedatabase.app/recipes.json',
       recipes
     ).subscribe(response => {
-      console.log(response);
+      // console.log(response);
     });
   }
 
